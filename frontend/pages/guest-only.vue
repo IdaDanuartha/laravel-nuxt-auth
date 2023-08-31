@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script setup>
+definePageMeta({
+  middleware: ['guest']
+})
+</script>
 
 <template>
   <div>

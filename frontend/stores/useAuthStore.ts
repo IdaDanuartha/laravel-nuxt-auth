@@ -44,6 +44,8 @@ export const useAuthStore = defineStore('auth', () => {
           body: credentials,
         })
         await fetchUser()
+        
+        return login
     }
 
     const register = async (info: RegisterInfo) => {      
@@ -53,6 +55,8 @@ export const useAuthStore = defineStore('auth', () => {
           body: info,
         })
         await fetchUser()
+        
+        return register
     }
 
     return {

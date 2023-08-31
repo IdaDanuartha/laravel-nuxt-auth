@@ -11,7 +11,7 @@ const auth = useAuthStore()
 const handleLogin = async () => {
   const { error } = await auth.login(form.value)
   if(!error.value) {
-    console.log("Login success!")
+    navigateTo("/")
   }
 }
 
