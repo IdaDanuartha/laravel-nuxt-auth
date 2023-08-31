@@ -1,6 +1,10 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore'
 
+definePageMeta({
+  middleware: ['guest']
+})
+
 const form = ref({
   name: "",
   email: "",
@@ -13,7 +17,7 @@ const auth = useAuthStore()
 const handleRegister = async () => {
   const { error } = await auth.register(form.value)
   if(!error.value) {
-    navigateTo("/")
+    console.log('account created')
   }
 }
 

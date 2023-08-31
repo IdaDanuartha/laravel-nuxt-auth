@@ -1,6 +1,10 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore'
 
+definePageMeta({
+  middleware: ['guest']
+})
+
 const form = ref({
   email: "test@example.com",
   password: "password"
@@ -11,7 +15,7 @@ const auth = useAuthStore()
 const handleLogin = async () => {
   const { error } = await auth.login(form.value)
   if(!error.value) {
-    navigateTo("/")
+    console.log('login success')
   }
 }
 
