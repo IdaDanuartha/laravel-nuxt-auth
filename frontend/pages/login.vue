@@ -1,25 +1,18 @@
 <script setup>
+import { useAuthStore } from '@/stores/useAuthStore'
+
 const form = ref({
   email: "test@example.com",
   password: "password"
 })
 
+const auth = useAuthStore()
+
 const handleLogin = async () => {
-  await useFetch("http://localhost:8000/sanctum/csrf-cookie", {
-    credentials: "include",
-  })
-
-  const token = useCookie("XSRF-TOKEN")
-
-  await useFetch("http://localhost:8000/login", {
-    credentials: "include",
-    method: "POST",
-    watch: false,
-    body: form.value,
-    headers: {
-      "X-XSRF-TOKEN": token.value
-    }
-  })
+  const { error } = await auth.login(form.value)
+  if(!error.value) {
+    console.log("Login success!")
+  }
 }
 
 </script>

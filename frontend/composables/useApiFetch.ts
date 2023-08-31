@@ -9,7 +9,14 @@ export const useApiFetch = <T>(path: string, options: UseFetchOptions<T> = {}) =
     headers["X-XSRF-TOKEN"] = token.value as string
   }
 
-  return useFetch(`http://localhost:8000/${path}`, {
+  if(process.server) {
+    headers = {
+      ...headers,
+      ...useRequestHeaders(["referer", "cookie"])
+    }
+  }
+
+  return useFetch(`http://localhost:8000${path}`, {
     credentials: "include",    
     watch: false,
     ...options,
